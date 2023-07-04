@@ -28,7 +28,12 @@ public class Main {
     }
 
     public static Path createDirectoryBackup (String sourceDirectory) throws IOException {
+        Path source = Paths.get(sourceDirectory);
         Path backup = Paths.get("./backup");
+
+        if (!Files.exists(source)) {
+            throw new IOException("Source directory not found");
+        }
 
         if (Files.exists(backup)) {
             throw new IOException("Backup directory already exists");
